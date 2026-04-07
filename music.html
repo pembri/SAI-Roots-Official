@@ -81,6 +81,8 @@ h1{
   border-radius:15px;
   background:rgba(255,255,255,0.06);
   text-align:center;
+  position: sticky;
+  bottom: 20px;
 }
 
 audio{
@@ -106,18 +108,17 @@ audio{
 
 <div class="section">
 <div class="section-title">SINGLE</div>
-
 <div class="song" data-title="Drama Klenik"><span><i class="fa-solid fa-play"></i>Drama Klenik</span></div>
 <div class="song" data-title="Senandung Manis"><span><i class="fa-solid fa-play"></i>Senandung Manis</span></div>
 <div class="song" data-title="Eksploitasi"><span><i class="fa-solid fa-play"></i>Eksploitasi</span></div>
 <div class="song" data-title="Jurus Liar"><span><i class="fa-solid fa-play"></i>Jurus Liar</span></div>
 <div class="song" data-title="Dari Jauh"><span><i class="fa-solid fa-play"></i>Dari Jauh</span></div>
 <div class="song" data-title="Kasih Mengalun"><span><i class="fa-solid fa-play"></i>Kasih Mengalun</span></div>
+<div class="song" data-title="Genjer Hijau"><span><i class="fa-solid fa-play"></i>Genjer Hijau</span></div>
 </div>
 
 <div class="section">
-<div class="section-title">ALBUM: Critical Fire</div>
-
+<div class="section-title">ALBUM: CRITICAL FIRE</div>
 <div class="song" data-title="Babylon Burn"><span><i class="fa-solid fa-play"></i>Babylon Burn</span></div>
 <div class="song" data-title="Bayang Singgasana"><span><i class="fa-solid fa-play"></i>Bayang Singgasana</span></div>
 <div class="song" data-title="Blaze It Up"><span><i class="fa-solid fa-play"></i>Blaze It Up</span></div>
@@ -128,6 +129,20 @@ audio{
 <div class="song" data-title="Propaganda"><span><i class="fa-solid fa-play"></i>Propaganda</span></div>
 <div class="song" data-title="Roots Medication"><span><i class="fa-solid fa-play"></i>Roots Medication</span></div>
 <div class="song" data-title="Skank Patrol"><span><i class="fa-solid fa-play"></i>Skank Patrol</span></div>
+</div>
+
+<div class="section">
+<div class="section-title">ALBUM: REBORN RIDDIM</div>
+<div class="song" data-title="Reborn Riddim"><span><i class="fa-solid fa-play"></i>Reborn Riddim</span></div>
+<div class="song" data-title="Autopsi Mic"><span><i class="fa-solid fa-play"></i>Autopsi Mic</span></div>
+<div class="song" data-title="Salam Dari Timur"><span><i class="fa-solid fa-play"></i>Salam Dari Timur</span></div>
+<div class="song" data-title="Mantra Malam"><span><i class="fa-solid fa-play"></i>Mantra Malam</span></div>
+<div class="song" data-title="Magic Mushroom"><span><i class="fa-solid fa-play"></i>Magic Mushroom</span></div>
+<div class="song" data-title="Rastaman"><span><i class="fa-solid fa-play"></i>Rastaman</span></div>
+<div class="song" data-title="Melayang Pelan"><span><i class="fa-solid fa-play"></i>Melayang Pelan</span></div>
+<div class="song" data-title="Tanah Hijau"><span><i class="fa-solid fa-play"></i>Tanah Hijau</span></div>
+<div class="song" data-title="BBM Busuk"><span><i class="fa-solid fa-play"></i>BBM Busuk</span></div>
+<div class="song" data-title="Kabur Saja Dulu"><span><i class="fa-solid fa-play"></i>Kabur Saja Dulu</span></div>
 </div>
 
 <div class="player">
@@ -142,26 +157,41 @@ audio{
 const audio = document.getElementById("audioPlayer");
 const nowPlaying = document.getElementById("nowPlaying");
 
-// Base URL untuk mempermudah pengelolaan tautan
 const baseUrl = "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/";
 
 const links = {
+  // SINGLE
   "Drama Klenik": baseUrl + "Drama%20Klenik.mp3",
   "Senandung Manis": baseUrl + "Senandung%20Manis.mp3",
   "Eksploitasi": baseUrl + "Eksploitasi.mp3",
   "Jurus Liar": baseUrl + "Jurus%20Liar.mp3",
   "Dari Jauh": baseUrl + "Dari%20Jauh.mp3",
   "Kasih Mengalun": baseUrl + "Kasih%20Mengalun.mp3",
+  "Genjer Hijau": baseUrl + "Genjer%20Hijau.mp3",
+
+  // ALBUM: CRITICAL FIRE
   "Babylon Burn": baseUrl + "Babylon%20Burn.mp3",
   "Bayang Singgasana": baseUrl + "Bayang%20Singgasana.mp3",
   "Blaze It Up": baseUrl + "Blaze%20It%20Up.mp3",
   "Evaluasi Lagi": baseUrl + "Evaluasi%20Lagi.mp3",
   "Irama Hidup": baseUrl + "Irama%20Hidup.mp3",
   "Jamaican Sound": baseUrl + "Jamaican%20Sound.mp3",
-  "Ormas Tipu-tipu": baseUrl + "Ormas%20Tipu-tipu.mp3",
+  "Ormas Tipu-tipu": baseUrl + "Ormas%20Tipu%2Dtipu.mp3",
   "Propaganda": baseUrl + "Propaganda.mp3",
   "Roots Medication": baseUrl + "Roots%20Medication.mp3",
-  "Skank Patrol": baseUrl + "Skank%20Patrol.mp3"
+  "Skank Patrol": baseUrl + "Skank%20Patrol.mp3",
+
+  // ALBUM: REBORN RIDDIM
+  "Reborn Riddim": baseUrl + "Reborn%20Riddim.mp3",
+  "Autopsi Mic": baseUrl + "Autopsi%20Mic.mp3",
+  "Salam Dari Timur": baseUrl + "Salam%20Dari%20Timur.mp3",
+  "Mantra Malam": baseUrl + "Mantra%20Malam.mp3",
+  "Magic Mushroom": baseUrl + "Magic%20Mushroom.mp3",
+  "Rastaman": baseUrl + "Rastaman.mp3",
+  "Melayang Pelan": baseUrl + "Melayang%20Pelan.mp3",
+  "Tanah Hijau": baseUrl + "Tanah%20Hijau.mp3",
+  "BBM Busuk": baseUrl + "BBM%20Busuk.mp3",
+  "Kabur Saja Dulu": baseUrl + "Kabur%20Saja%20Dulu.mp3"
 };
 
 let currentSong = null;
@@ -169,29 +199,22 @@ let currentSong = null;
 document.querySelectorAll('.song').forEach(s => {
   s.onclick = function(){
     const title = this.dataset.title;
-    
-    // Menghapus kelas aktif dari semua lagu
-    document.querySelectorAll('.song').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.song').forEach(x=>x.classList.remove('active'));
     this.classList.add('active');
 
-    // Jika lagu yang sama diklik dan sedang diputar, maka pause
     if(currentSong === title && !audio.paused){
       audio.pause();
       nowPlaying.innerText = "Paused: " + title;
       return;
     }
 
-    // Mengatur sumber audio baru
     currentSong = title;
     audio.src = links[title];
     audio.load();
-    
-    // Memutar audio dan menangani error
-    audio.play().then(() => {
+    audio.play().then(()=>{
       nowPlaying.innerText = "Now Playing: " + title;
-    }).catch(error => {
-      console.error("Playback error:", error);
-      nowPlaying.innerText = "Gagal memutar. Coba lagi.";
+    }).catch(()=>{
+      nowPlaying.innerText = "Klik play manual ↓";
     });
   }
 });
