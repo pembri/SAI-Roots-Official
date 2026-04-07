@@ -5,155 +5,190 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Music - SAI Roots</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
 body{
-  margin:0;
-  font-family:'Poppins',sans-serif;
-  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-  color:white;
+  background: linear-gradient(135deg,#0f0f0f,#1c1c1c,#111);
+  color:#fff;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding-top:40px;
 }
-.container{
-  max-width:500px;
-  margin:auto;
-  padding:20px;
+
+.container{max-width:430px;width:100%;padding:20px;}
+
+.card{
+  background:rgba(255,255,255,0.05);
+  border-radius:25px;
+  padding:25px;
+  backdrop-filter: blur(10px);
+  box-shadow:0 10px 40px rgba(0,0,0,0.7);
 }
-.back-link{
+
+.back{
   color:#aaa;
-  text-decoration:none;
   font-size:13px;
+  text-decoration:none;
   display:inline-block;
   margin-bottom:15px;
 }
-h2{
-  margin-top:25px;
-  margin-bottom:10px;
-  font-weight:600;
-  border-bottom:1px solid rgba(255,255,255,0.2);
-  padding-bottom:5px;
+
+h1{
+  margin:10px 0 15px;
+  font-size:22px;
 }
+
+.section{margin-top:25px;}
+
+.section-title{
+  font-size:13px;
+  color:#888;
+  margin-bottom:10px;
+  letter-spacing:1px;
+}
+
 .song{
-  padding:12px 15px;
-  margin:8px 0;
-  border-radius:12px;
-  background:rgba(255,255,255,0.08);
-  cursor:pointer;
   display:flex;
   align-items:center;
   justify-content:space-between;
+  background:rgba(255,255,255,0.06);
+  padding:12px 14px;
+  border-radius:12px;
+  margin-bottom:10px;
+  cursor:pointer;
   transition:0.25s;
 }
+
 .song:hover{
-  background:rgba(255,255,255,0.18);
-  transform:translateX(5px);
+  background:rgba(255,255,255,0.12);
 }
-.song.active{
-  background:#1db954;
-  color:#fff;
-  font-weight:600;
+
+.song.active span i{
+  color:#1db954;
 }
+
+.song i{margin-right:10px;color:#aaa;}
+
 .player{
-  position:fixed;
-  bottom:0;
-  left:0;
-  width:100%;
-  background:#111;
-  padding:10px 15px;
-  box-shadow:0 -5px 15px rgba(0,0,0,0.5);
-  display:flex;
-  flex-direction:column;
-  gap:5px;
+  margin-top:20px;
+  padding:15px;
+  border-radius:15px;
+  background:rgba(255,255,255,0.06);
+  text-align:center;
 }
-#nowPlaying{
-  font-size:14px;
-  color:#ccc;
-}
+
 audio{
   width:100%;
-  outline:none;
+  margin-top:10px;
+}
+
+.now-playing{
+  font-size:13px;
+  color:#aaa;
 }
 </style>
 </head>
 
 <body>
+
 <div class="container">
+<div class="card">
 
-<!-- Tombol kembali -->
-<a href="https://pembri.github.io/SAI-Roots-Official/" class="back-link">← Kembali</a>
+<a href="https://pembri.github.io/SAI-Roots-Official/" class="back">← Kembali</a>
 
-<h2>Single</h2>
-<div class="song" onclick="playSong(this,'Drama Klenik',links.drama)">Drama Klenik <i class="fa-solid fa-play"></i></div>
-<div class="song" onclick="playSong(this,'Senandung Manis',links.senandung)">Senandung Manis <i class="fa-solid fa-play"></i></div>
-<div class="song" onclick="playSong(this,'Eksploitasi',links.eksploitasi)">Eksploitasi <i class="fa-solid fa-play"></i></div>
-<div class="song" onclick="playSong(this,'Jurus Liar',links.jurus)">Jurus Liar <i class="fa-solid fa-play"></i></div>
-<div class="song" onclick="playSong(this,'Dari Jauh',links.dari)">Dari Jauh <i class="fa-solid fa-play"></i></div>
-<div class="song" onclick="playSong(this,'Kasih Mengalun',links.kasih)">Kasih Mengalun <i class="fa-solid fa-play"></i></div>
+<h1>Music</h1>
 
-<h2>Album: Critical Fire</h2>
-<div class="song" onclick="playSong(this,'Babylon Burn',links.babylon)">Babylon Burn <i class="fa-solid fa-play"></i></div>
-<div class="song" onclick="playSong(this,'Bayang Singgasana',links.bayang)">Bayang Singgasana <i class="fa-solid fa-play"></i></div>
-<div class="song" onclick="playSong(this,'Blaze It Up',links.blaze)">Blaze It Up <i class="fa-solid fa-play"></i></div>
-<div class="song" onclick="playSong(this,'Evaluasi Lagi',links.evaluasi)">Evaluasi Lagi <i class="fa-solid fa-play"></i></div>
-<div class="song" onclick="playSong(this,'Irama Hidup',links.irama)">Irama Hidup <i class="fa-solid fa-play"></i></div>
-<div class="song" onclick="playSong(this,'Jamaican Sound',links.jamaican)">Jamaican Sound <i class="fa-solid fa-play"></i></div>
-<div class="song" onclick="playSong(this,'Ormas Tipu-tipu',links.ormas)">Ormas Tipu-tipu <i class="fa-solid fa-play"></i></div>
-<div class="song" onclick="playSong(this,'Propaganda',links.propaganda)">Propaganda <i class="fa-solid fa-play"></i></div>
-<div class="song" onclick="playSong(this,'Roots Medication',links.roots)">Roots Medication <i class="fa-solid fa-play"></i></div>
-<div class="song" onclick="playSong(this,'Skank Patrol',links.skank)">Skank Patrol <i class="fa-solid fa-play"></i></div>
+<!-- SINGLE -->
+<div class="section">
+<div class="section-title">SINGLE</div>
 
+<div class="song" data-title="Drama Klenik"><span><i class="fa-solid fa-play"></i>Drama Klenik</span></div>
+<div class="song" data-title="Senandung Manis"><span><i class="fa-solid fa-play"></i>Senandung Manis</span></div>
+<div class="song" data-title="Eksploitasi"><span><i class="fa-solid fa-play"></i>Eksploitasi</span></div>
+<div class="song" data-title="Jurus Liar"><span><i class="fa-solid fa-play"></i>Jurus Liar</span></div>
+<div class="song" data-title="Dari Jauh"><span><i class="fa-solid fa-play"></i>Dari Jauh</span></div>
+<div class="song" data-title="Kasih Mengalun"><span><i class="fa-solid fa-play"></i>Kasih Mengalun</span></div>
 </div>
 
+<!-- ALBUM -->
+<div class="section">
+<div class="section-title">ALBUM: Critical Fire</div>
+
+<div class="song" data-title="Babylon Burn"><span><i class="fa-solid fa-play"></i>Babylon Burn</span></div>
+<div class="song" data-title="Bayang Singgasana"><span><i class="fa-solid fa-play"></i>Bayang Singgasana</span></div>
+<div class="song" data-title="Blaze It Up"><span><i class="fa-solid fa-play"></i>Blaze It Up</span></div>
+<div class="song" data-title="Evaluasi Lagi"><span><i class="fa-solid fa-play"></i>Evaluasi Lagi</span></div>
+<div class="song" data-title="Irama Hidup"><span><i class="fa-solid fa-play"></i>Irama Hidup</span></div>
+<div class="song" data-title="Jamaican Sound"><span><i class="fa-solid fa-play"></i>Jamaican Sound</span></div>
+<div class="song" data-title="Ormas Tipu-tipu"><span><i class="fa-solid fa-play"></i>Ormas Tipu-tipu</span></div>
+<div class="song" data-title="Propaganda"><span><i class="fa-solid fa-play"></i>Propaganda</span></div>
+<div class="song" data-title="Roots Medication"><span><i class="fa-solid fa-play"></i>Roots Medication</span></div>
+<div class="song" data-title="Skank Patrol"><span><i class="fa-solid fa-play"></i>Skank Patrol</span></div>
+</div>
+
+<!-- PLAYER -->
 <div class="player">
-<div id="nowPlaying">Pilih lagu</div>
+<div class="now-playing" id="nowPlaying">Pilih lagu...</div>
 <audio id="audioPlayer" controls></audio>
 </div>
 
-<script>
-const audio=document.getElementById("audioPlayer");
-const nowPlaying=document.getElementById("nowPlaying");
-let currentSong=null;
+</div>
+</div>
 
-// Pastikan semua mp3 sudah diupload ke GitHub Pages
-const links={
-  drama:"https://pembri.github.io/SAI-Roots-Official/Drama%20Klenik.mp3",
-  senandung:"https://pembri.github.io/SAI-Roots-Official/Senandung%20Manis.mp3",
-  eksploitasi:"https://pembri.github.io/SAI-Roots-Official/Eksploitasi.mp3",
-  jurus:"https://pembri.github.io/SAI-Roots-Official/Jurus%20Liar.mp3",
-  dari:"https://pembri.github.io/SAI-Roots-Official/Dari%20Jauh.mp3",
-  kasih:"https://pembri.github.io/SAI-Roots-Official/Kasih%20Mengalun.mp3",
-  babylon:"https://pembri.github.io/SAI-Roots-Official/Babylon%20Burn.mp3",
-  bayang:"https://pembri.github.io/SAI-Roots-Official/Bayang%20Singgasana.mp3",
-  blaze:"https://pembri.github.io/SAI-Roots-Official/Blaze%20It%20Up.mp3",
-  evaluasi:"https://pembri.github.io/SAI-Roots-Official/Evaluasi%20Lagi.mp3",
-  irama:"https://pembri.github.io/SAI-Roots-Official/Irama%20Hidup.mp3",
-  jamaican:"https://pembri.github.io/SAI-Roots-Official/Jamaican%20Sound.mp3",
-  ormas:"https://pembri.github.io/SAI-Roots-Official/Ormas%20Tipu-tipu.mp3",
-  propaganda:"https://pembri.github.io/SAI-Roots-Official/Propaganda.mp3",
-  roots:"https://pembri.github.io/SAI-Roots-Official/Roots%20Medication.mp3",
-  skank:"https://pembri.github.io/SAI-Roots-Official/Skank%20Patrol.mp3"
+<script>
+const audio = document.getElementById("audioPlayer");
+const nowPlaying = document.getElementById("nowPlaying");
+
+const links = {
+  "Drama Klenik": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Drama%20Klenik.mp3",
+  "Senandung Manis": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Senandung%20Manis.mp3",
+  "Eksploitasi": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Eksploitasi.mp3",
+  "Jurus Liar": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Jurus%20Liar.mp3",
+  "Dari Jauh": "https://github.com/pembri/SAI-Roots-Official/refs/heads/main/Dari%20Jauh.mp3",
+  "Kasih Mengalun": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Kasih%20Mengalun.mp3",
+  "Babylon Burn": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Babylon%20Burn.mp3",
+  "Bayang Singgasana": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Bayang%20Singgasana.mp3",
+  "Blaze It Up": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Blaze%20It%20Up.mp3",
+  "Evaluasi Lagi": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Evaluasi%20Lagi.mp3",
+  "Irama Hidup": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Irama%20Hidup.mp3",
+  "Jamaican Sound": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Jamaican%20Sound.mp3",
+  "Ormas Tipu-tipu": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Ormas%20Tipu‑tipu.mp3",
+  "Propaganda": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Propaganda.mp3",
+  "Roots Medication": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Roots%20Medication.mp3",
+  "Skank Patrol": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Skank%20Patrol.mp3"
 };
 
-function playSong(el,title,url){
-  document.querySelectorAll('.song').forEach(s=>s.classList.remove('active'));
-  el.classList.add('active');
+let currentSong = null;
 
-  if(currentSong===url && !audio.paused){
-    audio.pause();
-    nowPlaying.innerText="Paused: "+title;
-    return;
+document.querySelectorAll('.song').forEach(s => {
+  s.onclick = function(){
+    const title = this.dataset.title;
+    document.querySelectorAll('.song').forEach(x=>x.classList.remove('active'));
+    this.classList.add('active');
+
+    if(currentSong === title && !audio.paused){
+      audio.pause();
+      nowPlaying.innerText = "Paused: " + title;
+      return;
+    }
+
+    currentSong = title;
+    audio.src = links[title];
+    audio.load();
+    audio.play().then(()=>{
+      nowPlaying.innerText = "Now Playing: " + title;
+    }).catch(()=>{
+      nowPlaying.innerText = "Klik play manual ↓";
+    });
   }
-
-  currentSong=url;
-  audio.src=url;
-  audio.load();
-  audio.play().then(()=>{
-    nowPlaying.innerText="Now Playing: "+title;
-  }).catch(()=>{
-    nowPlaying.innerText="Klik play manual ↓";
-  });
-}
+});
 </script>
+
 </body>
 </html>
