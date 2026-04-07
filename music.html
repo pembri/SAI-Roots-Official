@@ -69,6 +69,11 @@ h1{
   background:rgba(255,255,255,0.12);
 }
 
+.song.active{
+  background:rgba(29, 185, 84, 0.15);
+  border: 1px solid rgba(29, 185, 84, 0.3);
+}
+
 .song.active span i{
   color:#1db954;
 }
@@ -83,6 +88,7 @@ h1{
   text-align:center;
   position: sticky;
   bottom: 20px;
+  z-index: 100;
 }
 
 audio{
@@ -93,6 +99,7 @@ audio{
 .now-playing{
   font-size:13px;
   color:#aaa;
+  margin-bottom: 5px;
 }
 </style>
 </head>
@@ -156,11 +163,11 @@ audio{
 <script>
 const audio = document.getElementById("audioPlayer");
 const nowPlaying = document.getElementById("nowPlaying");
+const songElements = document.querySelectorAll('.song');
 
 const baseUrl = "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/";
 
 const links = {
-  // SINGLE
   "Drama Klenik": baseUrl + "Drama%20Klenik.mp3",
   "Senandung Manis": baseUrl + "Senandung%20Manis.mp3",
   "Eksploitasi": baseUrl + "Eksploitasi.mp3",
@@ -168,8 +175,6 @@ const links = {
   "Dari Jauh": baseUrl + "Dari%20Jauh.mp3",
   "Kasih Mengalun": baseUrl + "Kasih%20Mengalun.mp3",
   "Genjer Hijau": baseUrl + "Genjer%20Hijau.mp3",
-
-  // ALBUM: CRITICAL FIRE
   "Babylon Burn": baseUrl + "Babylon%20Burn.mp3",
   "Bayang Singgasana": baseUrl + "Bayang%20Singgasana.mp3",
   "Blaze It Up": baseUrl + "Blaze%20It%20Up.mp3",
@@ -180,8 +185,6 @@ const links = {
   "Propaganda": baseUrl + "Propaganda.mp3",
   "Roots Medication": baseUrl + "Roots%20Medication.mp3",
   "Skank Patrol": baseUrl + "Skank%20Patrol.mp3",
-
-  // ALBUM: REBORN RIDDIM
   "Reborn Riddim": baseUrl + "Reborn%20Riddim.mp3",
   "Autopsi Mic": baseUrl + "Autopsi%20Mic.mp3",
   "Salam Dari Timur": baseUrl + "Salam%20Dari%20Timur.mp3",
@@ -194,30 +197,52 @@ const links = {
   "Kabur Saja Dulu": baseUrl + "Kabur%20Saja%20Dulu.mp3"
 };
 
-let currentSong = null;
+let currentSongIndex = -1;
 
-document.querySelectorAll('.song').forEach(s => {
-  s.onclick = function(){
-    const title = this.dataset.title;
-    document.querySelectorAll('.song').forEach(x=>x.classList.remove('active'));
-    this.classList.add('active');
+function playSong(index) {
+  if (index >= 0 && index < songElements.length) {
+    currentSongIndex = index;
+    const element = songElements[index];
+    const title = element.dataset.title;
 
-    if(currentSong === title && !audio.paused){
-      audio.pause();
-      nowPlaying.innerText = "Paused: " + title;
-      return;
-    }
-
-    currentSong = title;
+    // UI Update
+    songElements.forEach(x => x.classList.remove('active'));
+    element.classList.add('active');
+    
+    // Audio Update
     audio.src = links[title];
     audio.load();
-    audio.play().then(()=>{
+    audio.play().then(() => {
       nowPlaying.innerText = "Now Playing: " + title;
-    }).catch(()=>{
-      nowPlaying.innerText = "Klik play manual ↓";
+      // Scroll otomatis ke lagu yang sedang diputar agar tidak tenggelam
+      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }).catch(() => {
+      nowPlaying.innerText = "Gagal memutar. Klik Play manual ↓";
     });
   }
+}
+
+// Event Klik pada lagu
+songElements.forEach((s, index) => {
+  s.onclick = function() {
+    if (currentSongIndex === index && !audio.paused) {
+      audio.pause();
+      nowPlaying.innerText = "Paused: " + this.dataset.title;
+    } else {
+      playSong(index);
+    }
+  };
 });
+
+// AUTO PLAY NEXT: Logika utama agar lanjut otomatis
+audio.onended = function() {
+  let nextIndex = currentSongIndex + 1;
+  if (nextIndex < songElements.length) {
+    playSong(nextIndex);
+  } else {
+    nowPlaying.innerText = "Playlist Berakhir";
+  }
+};
 </script>
 
 </body>
