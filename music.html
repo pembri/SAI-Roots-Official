@@ -104,7 +104,6 @@ audio{
 
 <h1>Music</h1>
 
-<!-- SINGLE -->
 <div class="section">
 <div class="section-title">SINGLE</div>
 
@@ -116,7 +115,6 @@ audio{
 <div class="song" data-title="Kasih Mengalun"><span><i class="fa-solid fa-play"></i>Kasih Mengalun</span></div>
 </div>
 
-<!-- ALBUM -->
 <div class="section">
 <div class="section-title">ALBUM: Critical Fire</div>
 
@@ -132,7 +130,6 @@ audio{
 <div class="song" data-title="Skank Patrol"><span><i class="fa-solid fa-play"></i>Skank Patrol</span></div>
 </div>
 
-<!-- PLAYER -->
 <div class="player">
 <div class="now-playing" id="nowPlaying">Pilih lagu...</div>
 <audio id="audioPlayer" controls></audio>
@@ -145,23 +142,26 @@ audio{
 const audio = document.getElementById("audioPlayer");
 const nowPlaying = document.getElementById("nowPlaying");
 
+// Base URL untuk mempermudah pengelolaan tautan
+const baseUrl = "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/";
+
 const links = {
-  "Drama Klenik": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Drama%20Klenik.mp3",
-  "Senandung Manis": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Senandung%20Manis.mp3",
-  "Eksploitasi": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Eksploitasi.mp3",
-  "Jurus Liar": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Jurus%20Liar.mp3",
-  "Dari Jauh": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Dari%20Jauh.mp3",
-  "Kasih Mengalun": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Kasih%20Mengalun.mp3",
-  "Babylon Burn": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Babylon%20Burn.mp3",
-  "Bayang Singgasana": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Bayang%20Singgasana.mp3",
-  "Blaze It Up": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Blaze%20It%20Up.mp3",
-  "Evaluasi Lagi": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Evaluasi%20Lagi.mp3",
-  "Irama Hidup": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Irama%20Hidup.mp3",
-  "Jamaican Sound": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Jamaican%20Sound.mp3",
-  "Ormas Tipu-tipu": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Ormas%20Tipu‑tipu.mp3",
-  "Propaganda": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Propaganda.mp3",
-  "Roots Medication": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Roots%20Medication.mp3",
-  "Skank Patrol": "https://github.com/pembri/SAI-Roots-Official/raw/refs/heads/main/Skank%20Patrol.mp3"
+  "Drama Klenik": baseUrl + "Drama%20Klenik.mp3",
+  "Senandung Manis": baseUrl + "Senandung%20Manis.mp3",
+  "Eksploitasi": baseUrl + "Eksploitasi.mp3",
+  "Jurus Liar": baseUrl + "Jurus%20Liar.mp3",
+  "Dari Jauh": baseUrl + "Dari%20Jauh.mp3",
+  "Kasih Mengalun": baseUrl + "Kasih%20Mengalun.mp3",
+  "Babylon Burn": baseUrl + "Babylon%20Burn.mp3",
+  "Bayang Singgasana": baseUrl + "Bayang%20Singgasana.mp3",
+  "Blaze It Up": baseUrl + "Blaze%20It%20Up.mp3",
+  "Evaluasi Lagi": baseUrl + "Evaluasi%20Lagi.mp3",
+  "Irama Hidup": baseUrl + "Irama%20Hidup.mp3",
+  "Jamaican Sound": baseUrl + "Jamaican%20Sound.mp3",
+  "Ormas Tipu-tipu": baseUrl + "Ormas%20Tipu-tipu.mp3",
+  "Propaganda": baseUrl + "Propaganda.mp3",
+  "Roots Medication": baseUrl + "Roots%20Medication.mp3",
+  "Skank Patrol": baseUrl + "Skank%20Patrol.mp3"
 };
 
 let currentSong = null;
@@ -169,22 +169,29 @@ let currentSong = null;
 document.querySelectorAll('.song').forEach(s => {
   s.onclick = function(){
     const title = this.dataset.title;
-    document.querySelectorAll('.song').forEach(x=>x.classList.remove('active'));
+    
+    // Menghapus kelas aktif dari semua lagu
+    document.querySelectorAll('.song').forEach(x => x.classList.remove('active'));
     this.classList.add('active');
 
+    // Jika lagu yang sama diklik dan sedang diputar, maka pause
     if(currentSong === title && !audio.paused){
       audio.pause();
       nowPlaying.innerText = "Paused: " + title;
       return;
     }
 
+    // Mengatur sumber audio baru
     currentSong = title;
     audio.src = links[title];
     audio.load();
-    audio.play().then(()=>{
+    
+    // Memutar audio dan menangani error
+    audio.play().then(() => {
       nowPlaying.innerText = "Now Playing: " + title;
-    }).catch(()=>{
-      nowPlaying.innerText = "Klik play manual ↓";
+    }).catch(error => {
+      console.error("Playback error:", error);
+      nowPlaying.innerText = "Gagal memutar. Coba lagi.";
     });
   }
 });
