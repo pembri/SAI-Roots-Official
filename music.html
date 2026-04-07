@@ -15,13 +15,18 @@ body{
   background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
   color:white;
 }
-
 .container{
   max-width:500px;
   margin:auto;
   padding:20px;
 }
-
+.back-link{
+  color:#aaa;
+  text-decoration:none;
+  font-size:13px;
+  display:inline-block;
+  margin-bottom:15px;
+}
 h2{
   margin-top:25px;
   margin-bottom:10px;
@@ -29,7 +34,6 @@ h2{
   border-bottom:1px solid rgba(255,255,255,0.2);
   padding-bottom:5px;
 }
-
 .song{
   padding:12px 15px;
   margin:8px 0;
@@ -41,18 +45,15 @@ h2{
   justify-content:space-between;
   transition:0.25s;
 }
-
 .song:hover{
   background:rgba(255,255,255,0.18);
   transform:translateX(5px);
 }
-
 .song.active{
   background:#1db954;
   color:#fff;
   font-weight:600;
 }
-
 .player{
   position:fixed;
   bottom:0;
@@ -65,12 +66,10 @@ h2{
   flex-direction:column;
   gap:5px;
 }
-
 #nowPlaying{
   font-size:14px;
   color:#ccc;
 }
-
 audio{
   width:100%;
   outline:none;
@@ -79,8 +78,10 @@ audio{
 </head>
 
 <body>
-
 <div class="container">
+
+<!-- Tombol kembali -->
+<a href="https://pembri.github.io/SAI-Roots-Official/" class="back-link">← Kembali</a>
 
 <h2>Single</h2>
 <div class="song" onclick="playSong(this,'Drama Klenik',links.drama)">Drama Klenik <i class="fa-solid fa-play"></i></div>
@@ -114,29 +115,28 @@ const audio=document.getElementById("audioPlayer");
 const nowPlaying=document.getElementById("nowPlaying");
 let currentSong=null;
 
+// Pastikan semua mp3 sudah diupload ke GitHub Pages
 const links={
-  drama:"https://raw.githubusercontent.com/pembri/SAI-Roots-Official/main/Drama%20Klenik.mp3",
-  senandung:"https://raw.githubusercontent.com/pembri/SAI-Roots-Official/main/Senandung%20Manis.mp3",
-  eksploitasi:"https://raw.githubusercontent.com/pembri/SAI-Roots-Official/main/Eksploitasi.mp3",
-  jurus:"https://raw.githubusercontent.com/pembri/SAI-Roots-Official/main/Jurus%20Liar.mp3",
-  dari:"https://raw.githubusercontent.com/pembri/SAI-Roots-Official/main/Dari%20Jauh.mp3",
-  kasih:"https://raw.githubusercontent.com/pembri/SAI-Roots-Official/main/Kasih%20Mengalun.mp3",
-  babylon:"https://raw.githubusercontent.com/pembri/SAI-Roots-Official/main/Babylon%20Burn.mp3",
-  bayang:"https://raw.githubusercontent.com/pembri/SAI-Roots-Official/main/Bayang%20Singgasana.mp3",
-  blaze:"https://raw.githubusercontent.com/pembri/SAI-Roots-Official/main/Blaze%20It%20Up.mp3",
-  evaluasi:"https://raw.githubusercontent.com/pembri/SAI-Roots-Official/main/Evaluasi%20Lagi.mp3",
-  irama:"https://raw.githubusercontent.com/pembri/SAI-Roots-Official/main/Irama%20Hidup.mp3",
-  jamaican:"https://raw.githubusercontent.com/pembri/SAI-Roots-Official/main/Jamaican%20Sound.mp3",
-  ormas:"https://raw.githubusercontent.com/pembri/SAI-Roots-Official/main/Ormas%20Tipu-tipu.mp3",
-  propaganda:"https://raw.githubusercontent.com/pembri/SAI-Roots-Official/main/Propaganda.mp3",
-  roots:"https://raw.githubusercontent.com/pembri/SAI-Roots-Official/main/Roots%20Medication.mp3",
-  skank:"https://raw.githubusercontent.com/pembri/SAI-Roots-Official/main/Skank%20Patrol.mp3"
+  drama:"https://pembri.github.io/SAI-Roots-Official/Drama%20Klenik.mp3",
+  senandung:"https://pembri.github.io/SAI-Roots-Official/Senandung%20Manis.mp3",
+  eksploitasi:"https://pembri.github.io/SAI-Roots-Official/Eksploitasi.mp3",
+  jurus:"https://pembri.github.io/SAI-Roots-Official/Jurus%20Liar.mp3",
+  dari:"https://pembri.github.io/SAI-Roots-Official/Dari%20Jauh.mp3",
+  kasih:"https://pembri.github.io/SAI-Roots-Official/Kasih%20Mengalun.mp3",
+  babylon:"https://pembri.github.io/SAI-Roots-Official/Babylon%20Burn.mp3",
+  bayang:"https://pembri.github.io/SAI-Roots-Official/Bayang%20Singgasana.mp3",
+  blaze:"https://pembri.github.io/SAI-Roots-Official/Blaze%20It%20Up.mp3",
+  evaluasi:"https://pembri.github.io/SAI-Roots-Official/Evaluasi%20Lagi.mp3",
+  irama:"https://pembri.github.io/SAI-Roots-Official/Irama%20Hidup.mp3",
+  jamaican:"https://pembri.github.io/SAI-Roots-Official/Jamaican%20Sound.mp3",
+  ormas:"https://pembri.github.io/SAI-Roots-Official/Ormas%20Tipu-tipu.mp3",
+  propaganda:"https://pembri.github.io/SAI-Roots-Official/Propaganda.mp3",
+  roots:"https://pembri.github.io/SAI-Roots-Official/Roots%20Medication.mp3",
+  skank:"https://pembri.github.io/SAI-Roots-Official/Skank%20Patrol.mp3"
 };
 
 function playSong(el,title,url){
-  document.querySelectorAll('.song').forEach(s=>{
-    s.classList.remove('active');
-  });
+  document.querySelectorAll('.song').forEach(s=>s.classList.remove('active'));
   el.classList.add('active');
 
   if(currentSong===url && !audio.paused){
@@ -155,6 +155,5 @@ function playSong(el,title,url){
   });
 }
 </script>
-
 </body>
 </html>
